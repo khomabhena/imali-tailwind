@@ -6,7 +6,7 @@ const IncomeDetails = ({ email, currency, currencyDetails, totalIncome }) => {
 
     useEffect(() => {
         getIncome()
-    }, [totalIncome])
+    })
 
     const getIncome = async () => {
         const { status, data } = await fetchMyData(`/api/v1/income`, { email, currency })

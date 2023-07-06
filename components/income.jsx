@@ -24,7 +24,7 @@ const Income = ({email, currency}) => {
 
         getCurrencyDetails()
         getTotalIncome()
-    }, [currency])
+    })
 
 
     const getTotalIncome = async () => {
