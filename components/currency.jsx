@@ -1,3 +1,5 @@
+import { fetchMyData } from '@/fetch/fetchMyData'
+import { postMyData } from '@/fetch/postMyData'
 import Link from 'next/link'
 import React, { useEffect, useState, useRef } from 'react'
 
@@ -14,25 +16,24 @@ const Currency = () => {
     },[])
 
     const getCurrencies = async () => {
-        const response = await fetch(`http://localhost:3030/api/v1/currency/${email}`)
-        const { status } = response
+        // const response = await fetch(`http://localhost:3030/api/v1/currency/${email}`)
+        const { status, data } = await fetchMyData(`/api/v1/currency/${email}`)
         
         if (status === 200) {
-            const data = await response.json()
             setCurrencies(data)
         }
     }
 
     const handleCreateCurrency = async (e) => {
         e.preventDefault()
-        const response = await fetch(`http://localhost:3030/api/v1/currency`, {
-            method: 'POST',
-            body: JSON.stringify({ code, symbol, email }),
-            headers: { 
-                'Content-Type': 'application/json'
-            }
-        })
-        const {status} = response
+        // const response = await fetch(`http://localhost:3030/api/v1/currency`, {
+        //     method: 'POST',
+        //     body: JSON.stringify({ code, symbol, email }),
+        //     headers: { 
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        const { status, data } = await postMyData(`/api/v1/currency`, { code, symbol, email })
 
         if (status == 200) {
             getCurrencies()
