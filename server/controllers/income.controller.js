@@ -69,7 +69,7 @@ export const getIncome = async (req, res) => {
         const { id } = req.params
         const data = await incomeModel.findOne({ id: id })
 
-        res.status(200).json({ data })
+        res.status(200).json(data)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -83,6 +83,19 @@ export const getAllIncome = async (req, res) => {
             .sort({ dateCreated: -1 })
 
         res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const getTotalIncome = async (req, res) => {
+    try {
+        const { email, currency } = req.query
+        const data = await incomeModel
+            .find({ email: email, currency: currency })
+
+        const total = await data.map(item => item.amount).reduce((sum, val) => sum + val, 0)
+        res.status(200).json(total)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

@@ -20,6 +20,18 @@ export const createCurrency = async (req, res) => {
     }
 }
 
+export const getCurrency = async (req, res) => {
+    try {
+        const { id } = req.params
+        const data = await currencyModel
+            .findById(id)
+
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
 export const getMyCurrency = async (req, res) => {
     try {
         const { email } = req.params
