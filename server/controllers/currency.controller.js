@@ -13,7 +13,7 @@ export const createCurrency = async (req, res) => {
                 symbol,
                 email
             })
-            res.status(400).json(data)
+            res.status(200).json(data)
         }
     } catch (error) {
         res.status(500).json({ message: error.message })
