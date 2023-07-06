@@ -3,6 +3,7 @@ import { postMyData } from '@/fetch/postMyData'
 import { Router } from 'next/router'
 import React, { useState, useEffect, useRef } from 'react'
 import Type from './type'
+import IncomeDetails from './income-details'
 
 const Income = ({email, currency}) => {
     const refAmount = useRef('')
@@ -61,7 +62,8 @@ const Income = ({email, currency}) => {
             <div className={` w-16 text-slate-300 text-xl font-semibold`}>{currencyDetails.code}</div>
         </form>
 
-        <Type email={email} currency={currency} totalIncome={totalIncome} />
+        <Type email={email} currency={currency} totalIncome={totalIncome} currencyDetails={currencyDetails} />
+        <IncomeDetails email={email} currency={currency} totalIncome={totalIncome} currencyDetails={currencyDetails} />
     </div>
   )
 }
