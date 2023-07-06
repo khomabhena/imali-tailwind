@@ -9,17 +9,14 @@ const Layout = ({ children }) => {
 
   return (
     <div className=' px-4 md:px-8 bg-gradient-to-r from-cyan-900 to-sky-950 min-h-screen w-full flex flex-col items-center'>
-        <div className='mt-12 w-full flex justify-between'>
+        <div className=' mt-4 w-full flex flex-col items-center'>
           <Link href='/'>
-            <Image className=' h-20 md:h-24 w-auto' src='/imali-logo-white.png' height={200} width={300} alt="" />
+            <Image className=' h-14 md:h-16 w-auto' src='/imali-logo-white-transparent.png' height={200} width={300} alt="" />
           </Link>
-          <div className=' p-4 rounded-md bg-opacity-50 flex gap-4 bg-slate-950'>
-            <h2 className=' md:text-lg text-slate-400 font-semibold'>{text}</h2>
-            <div className=' text-lg md:text-xl text-slate-300 font-bold'>
-              <h3>${usdBalance}</h3>
-              <h3>R{randBalance}</h3>
-            </div>
-          </div>
+          <ul className=' flex mt-4 gap-8 font-semibold text-lg text-slate-300'>
+            <li className=' border px-4 rounded-md border-slate-500 py-1'><Link href='/'>Currency</Link></li>
+            <li className=' border px-4 rounded-md border-slate-500 py-1'><Link href='/income'>Income</Link></li>
+          </ul>
         </div>
         {children}
     </div>

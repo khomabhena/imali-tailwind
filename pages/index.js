@@ -4,22 +4,34 @@ import Income from '@/components/income'
 import Buckets from '@/components/buckets'
 import { useEffect } from 'react'
 import { useStateContext } from '@/context/StateContext'
-
-const inter = Inter({ subsets: ['latin'] })
+import { useAuthContext } from '@/context/AuthContext'
+import { useRouter } from 'next/router'
+import Currency from '@/components/currency'
 
 export default function Home() {
+  const router = useRouter()
   const {setUsdBalance, setRandBalance, setText, setInput, setTextarea, setButton} = useStateContext()
+  const { user } = useAuthContext()
+  console.log('User Info');
+  console.log(user)
 
     useEffect(() => {
       setUsdBalance(100)
       setRandBalance(2400)
       setText('Total Income:')
+
+      // if (user == null) {
+      //   router.push('/')
+      //   return
+      // }
+
     })
 
   return (
     <>
-      <Income input='Enter Income Amount' textarea='Income Source' button='Enter' />
-      <Buckets />
+      <Currency />
+      {/* <Income input='Enter Income Amount' textarea='Income Source' button='Enter' /> */}
+      {/* <Buckets /> */}
     </>
   )
 }
