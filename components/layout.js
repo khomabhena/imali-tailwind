@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
           </Link>
           <ul className=' flex mt-4 gap-8 font-semibold text-lg text-slate-300'>
             <li className=' border px-4 rounded-md border-slate-500 py-1'><Link href='/'>Currency</Link></li>
-            <li className=' border px-4 rounded-md border-slate-500 py-1'><Link href='/income'>Income</Link></li>
+            {/* <li className=' border px-4 rounded-md border-slate-500 py-1'><Link href='/income'>Income</Link></li> */}
           </ul>
         </div>
         {children}
