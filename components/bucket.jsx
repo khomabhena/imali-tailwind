@@ -12,6 +12,7 @@ const Bucket = ({ type, email, currency }) => {
     const [reason, setReason] = useState('')
     const [balance, setBalance] = useState(0)
     const [withdrawals, setWithdrawals] = useState(0)
+    const [error, setError] = useState('')
     
     useEffect(() => {
         const getCurrencyDetails = async () => {
@@ -54,6 +55,7 @@ const Bucket = ({ type, email, currency }) => {
 
     const handleWithdrawal = async (e) => {
         e.preventDefault()
+        setError('')
         const { status, data } = await postMyData(`/api/v1/bucket/withdraw`, { email, type, amount, currency, reason })
 
         if (status == 200) {
@@ -61,6 +63,8 @@ const Bucket = ({ type, email, currency }) => {
             refReason.current.value = ''
             getWithdrawals()
             getBalance()
+        } else {
+            setError(data.message)
         }
     }
   return (
@@ -71,6 +75,9 @@ const Bucket = ({ type, email, currency }) => {
                 <input ref={refAmount} onChange={(e) => setAmount(e.target.value)} className=' text-slate-300 px-4 py-2 border bg-transparent border-sky-800 rounded-md' type="number" id="" placeholder='Enter amount' />
                 <textarea rows={2} ref={refReason} onChange={(e) => setReason(e.target.value)} className=' text-slate-300 px-4 py-2 border bg-transparent border-sky-800 rounded-md' type="text" id="" placeholder='Reason for withdrawing' />
                 <button type='submit' className=' bg-slate-900/70 h-min py-2 px-8 text-slate-300 rounded-md shadow-md shadow-sky-800'>Withdraw Amount</button>
+                <div className=' flex justify-between gap-8 text-red-500  text-lg'>
+                    <p>{error}</p>
+                </div>
                 <div className=' flex justify-between gap-8 mt-4 text-slate-400  text-lg'>
                     <p>{typeDetails.name} Income:</p>
                     <p className=' font-semibold text-slate-300'>{currencyDetails.symbol}{(Math.round((balance + Number.EPSILON) * 100) / 100).toFixed(2)}</p>
