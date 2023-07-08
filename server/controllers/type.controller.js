@@ -30,7 +30,7 @@ export const getAllTypes = async (req, res) => {
     try {
         const data = await typeModel
             .find({})
-            .sort({ dateCreated: -1 })
+            .sort({ dateCreated: 1 })
         
         res.status(200).json(data)
     } catch (error) {
